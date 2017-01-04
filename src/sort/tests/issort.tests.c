@@ -4,6 +4,8 @@
 
 #include "../sort.h"
 
+#define KYEL  "\x1B[33m"
+
 int compare_ints(const void *key1, const void *key2)
 {
 	int k1 = *(int*)(key1);
@@ -27,7 +29,7 @@ int compare_ints_desc(const void *key1, const void *key2)
 }
 
 static int unsorted_arr[] = {5, 2, 8, 40, 22, 10, 4};
-static int random_unsorted_arr[10000];
+static int random_unsorted_arr[100000000];
 
 static clock_t start_times[2];
 static clock_t end_times[2];
@@ -36,7 +38,7 @@ void fill_random_unsorted_arr(void)
 {
 	srand(time(NULL));
 
-	for(int i = 0; i < 10000; i++) random_unsorted_arr[i] = rand();
+	for(int i = 0; i < 100000000; i++) random_unsorted_arr[i] = rand();
 }
 
 Test(insertion_sort, ascending_sort)
@@ -69,20 +71,11 @@ Test(insertion_sort, big_ascending_sort)
 {
 	start_times[0] = clock();
 
-	issort(&random_unsorted_arr, 10000, sizeof(int), &compare_ints);
+	issort(&random_unsorted_arr, 100000000, sizeof(int), &compare_ints);
 
 	end_times[0] = clock();
 	
 	double elapsed_time = (end_times[0] - start_times[0])/(double)CLOCKS_PER_SEC;
 
-	printf("sorting 10000 ints took approximately %f\n", elapsed_time);
-}
-
-ReportHook(POST_ALL)(struct criterion_global_stats *stats)
-{
-	(void) stats;
-	
-	double elapsed_time = (end_times[0] - start_times[0])/(double)CLOCKS_PER_SEC;
-
-	printf("sorting 10000 ints took approximately %f\n", elapsed_time);
+	printf(KYEL "Sorting 100000000 ints took approximately %f seconds.\n", elapsed_time);
 }
