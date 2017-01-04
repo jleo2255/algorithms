@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "sort.h"
+#include "issort.h"
 
 int issort(void *data, int size, int esize, int (*compare)(const void *key1, const void *key2))
 {

@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "../sort.h"
+#include "../issort.h"
 
 #define KYEL  "\x1B[33m"
 
