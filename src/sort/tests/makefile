@@ -7,7 +7,7 @@ CC=clang
 
 $(P):  $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS) $(LDLIBS) 
-	@mv *.o ../*.o ./bin/
+	@mkdir ./bin && mv *.o ../*.o ./bin/
 
 clean:
-	@rm -v ./bin/* tests
+	@rm -rv ./bin tests
