@@ -1,5 +1,5 @@
 P=tests
-OBJECTS=issort.tests.o qksort.tests.o ../issort.o ../qksort.o
+OBJECTS=issort.tests.o qksort.tests.o mgsort.tests.o ../issort.o ../qksort.o ../mgsort.o
 CFLAGS= -g -Wall -O3 -I/usr/local/include
 LDFLAGS=-L/usr/local/lib
 LDLIBS=-lcriterion
