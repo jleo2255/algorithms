@@ -5,6 +5,7 @@ LDFLAGS=-L/usr/local/lib
 LDLIBS=-lcriterion
 CC=clang
 ISSORT_PTRN= $(shell echo $(OBJECTS) | sed 's/[^ ]*issort[^ ]* *//g')
+ISSORT_OBJ_PTRN= $(shell echo $(OBJECTS) | sed 's/[^ ]*issort.o[^ ]* *//g')
 QKSORT_PTRN= $(shell echo $(OBJECTS) | sed 's/[^ ]*qksort[^ ]* *//g')
 MGSORT_PTRN= $(shell echo $(OBJECTS) | sed 's/[^ ]*mgsort[^ ]* *//g')
 
@@ -12,12 +13,18 @@ $(P):  $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS) $(LDLIBS) 
 	@mkdir ./bin && mv *.o ../*.o ./bin/
 
+test:
+	$(filter-out $(QKSORT_PTRN), $(OBJECTS)) $(filter-out $(ISSORT_OBJ_PTRN), $(OBJECTS))
+
+test1:
+	echo $(QKSORT_PTRN)
+
 issort_tests: $(filter-out $(ISSORT_PTRN), $(OBJECTS))
 	$(CC) $(CFLAGS) -o $@ $(filter-out $(ISSORT_PTRN), $(OBJECTS)) $(LDFLAGS) $(LDLIBS) 
 	@mkdir ./bin && mv *.o ../*.o ./bin/
 
-qksort_tests: $(filter-out $(QKSORT_PTRN), $(OBJECTS))
-	$(CC) $(CFLAGS) -o $@ $(filter-out $(QKSORT_PTRN), $(OBJECTS)) $(LDFLAGS) $(LDLIBS) 
+qksort_tests: $(filter-out $(QKSORT_PTRN), $(OBJECTS)) $(filter-out $(ISSORT_OBJ_PTRN), $(OBJECTS))
+	$(CC) $(CFLAGS) -o $@ $(filter-out $(QKSORT_PTRN), $(OBJECTS)) $(filter-out $(ISSORT_OBJ_PTRN), $(OBJECTS)) $(LDFLAGS) $(LDLIBS) 
 	@mkdir ./bin && mv *.o ../*.o ./bin/
 
 mgsort_tests: $(filter-out $(MGSORT_PTRN), $(OBJECTS))
@@ -25,4 +32,4 @@ mgsort_tests: $(filter-out $(MGSORT_PTRN), $(OBJECTS))
 	@mkdir ./bin && mv *.o ../*.o ./bin/
 
 clean:
-	@rm -rv ./bin tests
+	@rm -rv ./bin *tests
