@@ -13,12 +13,6 @@ $(P):  $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS) $(LDLIBS) 
 	@mkdir ./bin && mv *.o ../*.o ./bin/
 
-test:
-	$(filter-out $(QKSORT_PTRN), $(OBJECTS)) $(filter-out $(ISSORT_OBJ_PTRN), $(OBJECTS))
-
-test1:
-	echo $(QKSORT_PTRN)
-
 issort_tests: $(filter-out $(ISSORT_PTRN), $(OBJECTS))
 	$(CC) $(CFLAGS) -o $@ $(filter-out $(ISSORT_PTRN), $(OBJECTS)) $(LDFLAGS) $(LDLIBS) 
 	@mkdir ./bin && mv *.o ../*.o ./bin/
