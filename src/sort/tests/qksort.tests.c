@@ -29,7 +29,7 @@ int qksort_compare_ints_desc(const void *key1, const void *key2)
 }
 
 static int unsorted_arr[] = {5, 2, 8, 40, 22, 10, 4};
-static int qksort_random_unsorted_arr[2000000];
+static int qksort_random_unsorted_arr[1500000];
 
 static clock_t qksort_start_times[2];
 static clock_t qksort_end_times[2];
@@ -38,7 +38,7 @@ void fill_qksort_random_unsorted_arr(void)
 {
 	srand(time(NULL));
 
-	for(int i = 0; i < 2000000; i++) qksort_random_unsorted_arr[i] = rand();
+	for(int i = 0; i < 1500000; i++) qksort_random_unsorted_arr[i] = rand();
 }
 
 Test(quick_sort, ascending_sort)
@@ -71,11 +71,11 @@ Test(quick_sort, big_ascending_sort, .init = fill_qksort_random_unsorted_arr )
 {
 	qksort_start_times[0] = clock();
 
-	qksort(&qksort_random_unsorted_arr, 2000000, sizeof(int), 0, (2000000 - 1), &qksort_compare_ints);
+	qksort(&qksort_random_unsorted_arr, 1500000, sizeof(int), 0, (1500000 - 1), &qksort_compare_ints);
 
 	qksort_end_times[0] = clock();
 	
 	double elapsed_time = (qksort_end_times[0] - qksort_start_times[0])/(double)CLOCKS_PER_SEC;
 
-	printf(KYEL "Quicksort: Sorting 2000000 ints took approximately %f seconds.\n", elapsed_time);
+	printf(KYEL "Quicksort: Sorting 1500000 ints took approximately %f seconds.\n", elapsed_time);
 }

@@ -29,7 +29,7 @@ int mgsort_compare_ints_desc(const void *key1, const void *key2)
 }
 
 static int mgsort_unsorted_arr[] = {5, 2, 8, 40, 22, 10, 4};
-static int mgsort_random_unsorted_arr[2000000];
+static int mgsort_random_unsorted_arr[1500000];
 
 static clock_t mgsort_start_times[2];
 static clock_t mgsort_end_times[2];
@@ -38,7 +38,7 @@ void fill_mgsort_random_unsorted_arr(void)
 {
 	srand(time(NULL));
 
-	for(int i = 0; i < 2000000; i++) mgsort_random_unsorted_arr[i] = rand();
+	for(int i = 0; i < 1500000; i++) mgsort_random_unsorted_arr[i] = rand();
 }
 
 Test(merge_sort, ascending_sort)
@@ -71,11 +71,11 @@ Test(merge_sort, big_ascending_sort, .init = fill_mgsort_random_unsorted_arr )
 {
 	mgsort_start_times[0] = clock();
 
-	mgsort(&mgsort_random_unsorted_arr, 2000000, sizeof(int), 0, (2000000 - 1), &mgsort_compare_ints);
+	mgsort(&mgsort_random_unsorted_arr, 1500000, sizeof(int), 0, (1500000 - 1), &mgsort_compare_ints);
 
 	mgsort_end_times[0] = clock();
 	
 	double elapsed_time = (mgsort_end_times[0] - mgsort_start_times[0])/(double)CLOCKS_PER_SEC;
 
-	printf(KYEL "Mergesort: Sorting 2000000 ints took approximately %f seconds.\n", elapsed_time);
+	printf(KYEL "Mergesort: Sorting 1500000 ints took approximately %f seconds.\n", elapsed_time);
 }
