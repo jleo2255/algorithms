@@ -1,8 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "issort.h" 
-
 int ctsort(int *data, int size, int max_plus_one)
 {
 	int		*counts, *temp;
@@ -25,9 +23,9 @@ int ctsort(int *data, int size, int max_plus_one)
 	// adjust the counts to be an array of offsets
 	for (i = 1; i < max_plus_one; i++) counts[i] = counts[i - 1] + counts[i];
 
-	for (j = size - 1; j <= 0; j--)
+	for (j = size - 1; j >= 0; j--)
 	{
-		temp[counts[data[j] - 1]] = data[j];
+		temp[counts[data[j]] - 1] = data[j];
 		counts[data[j]] = counts[data[j]] - 1;
 	}
 
