@@ -31,7 +31,7 @@ void fill_ctsort_random_unsorted_arr(void)
 {
 	srand(time(NULL));
 
-	for(int i = 0; i < 1500000; i++) ctsort_random_unsorted_arr[i] = (rand() % ((int)pow(2, 29)));
+	for(int i = 0; i < 1500000; i++) ctsort_random_unsorted_arr[i] = (rand() % ((int)pow(2, 27)));
 }
 
 Test(counting_sort, ascending_sort)
